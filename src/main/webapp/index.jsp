@@ -29,6 +29,7 @@
 	        <a href="${pageContext.request.contextPath}/funcionarios" class="btn btn-secondary btn-lg">Funcionários</a>
 	        <a href="${pageContext.request.contextPath}/clientes" class="btn btn-secondary btn-lg">Clientes</a>
 	        <a href="${pageContext.request.contextPath}/produtos" class="btn btn-secondary btn-lg">Produtos</a>
+	        <a href="${pageContext.request.contextPath}/pedidos" class="btn btn-secondary btn-lg">Pedidos</a>
 	      </div>
 	    </main>
 	

@@ -13,6 +13,7 @@ public class DAOFactory {
 		listDAOsInterfaces.put(FuncionarioDAO.class, new MySQLFuncionarioDAO());
 		listDAOsInterfaces.put(ClienteDAO.class, new MySQLClienteDAO());
 		listDAOsInterfaces.put(ProdutoDAO.class, new MySQLProdutoDAO());
+		listDAOsInterfaces.put(PedidoDAO.class, new MySQLPedidoDAO());
 	}
 	
 	@SuppressWarnings("unchecked")

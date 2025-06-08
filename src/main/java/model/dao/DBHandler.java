@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import model.ModelException;
@@ -129,6 +130,14 @@ public class DBHandler {
         }
     }
 	
+    public Timestamp getTimestamp(String columnLabel) throws ModelException {
+        try {
+            return resultSet.getTimestamp(columnLabel);
+        } catch (SQLException e) {
+            throw new ModelException("Erro ao recuperar campo Timestamp: " + columnLabel, e);
+        }
+    }
+    
 	public String getString(String column) throws ModelException {
 		try {
 			return resultSet.getString(column);
