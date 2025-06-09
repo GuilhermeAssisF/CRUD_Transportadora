@@ -1,5 +1,6 @@
 <jsp:directive.page contentType="text/html; charset=UTF-8" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -16,7 +17,7 @@
             <div class="col-md-1"></div>
             <div class="col-md-10">
 
-                <a href="${pageContext.request.contextPath}/" class="btn btn-secondary">
+                <a href="${pageContext.request.contextPath}/" class="btn btn-secondary mb-3">
                     <i class="bi bi-house"></i>
                 </a>
 
@@ -32,9 +33,11 @@
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">Cliente Id</th>
-                            <th scope="col">Produto Id</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Produto</th>
                             <th scope="col">Quantidade</th>
+                            <th scope="col">Preço Unitário</th>
+                            <th scope="col">Total Pedido</th>
                             <th scope="col">Data Pedido</th>
                             <th scope="col">Editar</th>
                             <th scope="col">Remover</th>
@@ -44,10 +47,18 @@
                         <c:forEach var="pedido" items="${pedidos}">
                             <tr>
                                 <th scope="row">${pedido.id}</th>
-                                <td>${pedido.clienteId}</td>
-                                <td>${pedido.produtoId}</td>
+                                <td>${pedido.clienteNome}</td>
+                                <td>${pedido.produtoNome}</td>
                                 <td>${pedido.quantidade}</td>
-                                <td>${pedido.dataPedido}</td>
+                                <td>
+                                    <fmt:formatNumber value="${pedido.produto.preco}" type="currency" currencySymbol="R$ " />
+                                </td>
+                                <td>
+                                    <fmt:formatNumber value="${pedido.quantidade * pedido.produto.preco}" type="currency" currencySymbol="R$ " />
+                                </td>
+                                <td>
+                                    <fmt:formatDate value="${pedido.dataPedido}" pattern="dd/MM/yyyy" />
+                                </td>
                                 <td>
                                     <a class="bi bi-pencil-square"
                                        href="${pageContext.request.contextPath}/pedido/update?pedidoId=${pedido.id}">

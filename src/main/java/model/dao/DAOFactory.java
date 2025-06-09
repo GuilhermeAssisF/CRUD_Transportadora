@@ -20,4 +20,6 @@ public class DAOFactory {
 	public static <DAOInterface> DAOInterface createDAO(Class<?> entity){
 		return (DAOInterface) listDAOsInterfaces.get(entity);
 	} 
+	
+	
 }

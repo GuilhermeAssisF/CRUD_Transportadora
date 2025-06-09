@@ -14,19 +14,26 @@
 	<div class="d-flex flex-column min-vh-100 bg-light">
 		<!-- Navbar -->
 	    <nav class="navbar navbar-dark bg-dark">
-	      <div class="container">
-	        <span class="navbar-brand mb-0 h1">GA Transportes</span>
-	        <a href="${pageContext.request.contextPath}/logout" class="btn btn-warning">
-		    	<i class="bi bi-door-closed"></i> Logout
-		  	</a>
-	      </div>
-	    </nav>
+		    <div class="container d-flex justify-content-between align-items-center">
+		        <span class="navbar-brand mb-0 h1">GA Transportes</span>
+		
+		        <div>
+		            <a href="${pageContext.request.contextPath}/funcionarios" class="btn btn-warning me-2">
+		                <i class="bi bi-person-circle"></i> Funcionários
+		            </a>
+		            <a href="${pageContext.request.contextPath}/logout" class="btn btn-warning">
+		                <i class="bi bi-door-closed"></i> Logout
+		            </a>
+		        </div>
+		    </div>
+		</nav>
+
 	
 	    <!-- Conteúdo principal -->
 	    <main class="flex-grow-1 d-flex flex-column justify-content-center align-items-center text-center">
 	      <h1 class="my-4">Bem-vindo ao Sistema GA Transportes</h1>
 	      <div class="d-flex gap-3 flex-wrap justify-content-center">
-	        <a href="${pageContext.request.contextPath}/funcionarios" class="btn btn-secondary btn-lg">Funcionários</a>
+	        
 	        <a href="${pageContext.request.contextPath}/clientes" class="btn btn-secondary btn-lg">Clientes</a>
 	        <a href="${pageContext.request.contextPath}/produtos" class="btn btn-secondary btn-lg">Produtos</a>
 	        <a href="${pageContext.request.contextPath}/pedidos" class="btn btn-secondary btn-lg">Pedidos</a>

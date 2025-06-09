@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.math.BigDecimal;
 
 public class Pedido {
 
@@ -10,17 +11,23 @@ public class Pedido {
     private int quantidade;
     private Timestamp dataPedido;
 
+    // Campos para exibir nome de cliente e nome do produto
+    private String clienteNome;
+    private String produtoNome;
+
+    // Referências para objetos completos (opcional, mas útil)
+    private Cliente cliente;
+    private Produto produto;
+
     public Pedido() {
         this(0);
     }
 
     public Pedido(int id) {
         this.id = id;
-        this.clienteId = 0;
-        this.produtoId = 0;
-        this.quantidade = 0;
-        this.dataPedido = null;
     }
+
+    // Getters e Setters padrão
 
     public int getId() {
         return id;
@@ -62,8 +69,44 @@ public class Pedido {
         this.dataPedido = dataPedido;
     }
 
-    @Override
-    public String toString() {
-        return "Pedido #" + id;
+    public String getClienteNome() {
+        return clienteNome;
+    }
+
+    public void setClienteNome(String clienteNome) {
+        this.clienteNome = clienteNome;
+    }
+
+    public String getProdutoNome() {
+        return produtoNome;
+    }
+
+    public void setProdutoNome(String produtoNome) {
+        this.produtoNome = produtoNome;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    // Opcional: método que calcula o valor total do pedido
+    public BigDecimal getValorTotal() {
+        if (produto != null && produto.getPreco() != null) {
+            return produto.getPreco().multiply(new BigDecimal(quantidade));
+        } else {
+            return BigDecimal.ZERO;
+        }
     }
 }

@@ -2,8 +2,11 @@ package model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Cliente;
 import model.ModelException;
 import model.Pedido;
+import model.Produto;
 
 public class MySQLPedidoDAO implements PedidoDAO {
 
@@ -54,7 +57,13 @@ public class MySQLPedidoDAO implements PedidoDAO {
 
         List<Pedido> pedidos = new ArrayList<>();
 
-        String sql = "SELECT * FROM pedido ORDER BY id";
+        String sql = "SELECT p.id, p.cliente_id, p.produto_id, p.quantidade, p.data_pedido, " +
+	                "pr.nome AS produto_nome, pr.preco AS produto_preco, " +
+	                "c.nome AS cliente_nome " +
+	                "FROM pedido p " +
+	                "JOIN produto pr ON p.produto_id = pr.id " +
+	                "JOIN cliente c ON p.cliente_id = c.id " +
+	                "ORDER BY p.id";
 
         db.createStatement();
         db.executeQuery(sql);
@@ -71,7 +80,15 @@ public class MySQLPedidoDAO implements PedidoDAO {
     public Pedido findById(int id) throws ModelException {
         DBHandler db = new DBHandler();
 
-        String sql = "SELECT * FROM pedido WHERE id = ?";
+        // Aqui você também pode trazer o produto se quiser, mesmo que o seu código anterior não fazia
+        String sql = "SELECT p.id, p.cliente_id, p.produto_id, p.quantidade, p.data_pedido,\r\n"
+	        		+ "       pr.nome AS produto_nome, pr.preco AS produto_preco,\r\n"
+	        		+ "       c.nome AS cliente_nome\r\n"
+	        		+ "FROM pedido p\r\n"
+	        		+ "JOIN produto pr ON p.produto_id = pr.id\r\n"
+	        		+ "JOIN cliente c ON p.cliente_id = c.id\r\n"
+	        		+ "WHERE p.id = ?\r\n"
+	        		+ "";
 
         db.prepareStatement(sql);
         db.setInt(1, id);
@@ -93,6 +110,24 @@ public class MySQLPedidoDAO implements PedidoDAO {
         p.setQuantidade(db.getInt("quantidade"));
         p.setDataPedido(db.getTimestamp("data_pedido"));
 
+        // Cria e adiciona o Produto
+        Produto produto = new Produto();
+        produto.setId(db.getInt("produto_id"));
+        produto.setNome(db.getString("produto_nome"));
+        produto.setPreco(db.getBigDecimal("produto_preco"));
+        p.setProduto(produto);
+
+        // Cria e adiciona o Cliente
+        Cliente cliente = new Cliente();
+        cliente.setId(db.getInt("cliente_id"));
+        cliente.setName(db.getString("cliente_nome"));
+        p.setCliente(cliente);
+
+        // Também seta os nomes diretamente no Pedido (caso você use em jsp como pedido.clienteNome, pedido.produtoNome)
+        p.setProdutoNome(produto.getNome());
+        p.setClienteNome(cliente.getName());
+
         return p;
     }
+
 }
