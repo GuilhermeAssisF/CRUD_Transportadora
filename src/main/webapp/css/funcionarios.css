@@ -1,10 +1,10 @@
-/* Estilos globais para o layout (copiados da página de pedidos/produtos) */
+/* Estilos globais para o layout */
 body {
     background-color: #f0f2f5;
     /* Light gray background for the page */
 }
 
-/* Estilos da Sidebar */
+/* Estilos da Sidebar (copiados das páginas anteriores) */
 .sidebar {
     background-color: #ffffff;
     border-radius: 0.75rem;
@@ -60,7 +60,7 @@ body {
     border-top: 1px solid #dee2e6;
 }
 
-/* Estilo para o botão de Funcionários (com background menor) */
+/* Estilo para o botão de Funcionários (com background menor, badge-like) */
 .funcionarios-badge-link {
     display: inline-flex;
     /* Para que o background se ajuste ao conteúdo */
@@ -81,7 +81,6 @@ body {
     /* Centraliza o ícone e texto horizontalmente */
     text-decoration: none;
     /* Remove sublinhado */
-    /* margin-left: 0.5rem; Removido para ser controlado pela classe w-100 */
 }
 
 .funcionarios-badge-link:hover {
@@ -140,10 +139,10 @@ body {
     flex-direction: column;
 }
 
-/* Estilos dos cards de cliente (adaptados da página de pedidos/produtos) */
-.card-cliente {
+/* Estilos dos cards de funcionário */
+.card-funcionario {
     background-color: #ffffff;
-    /* Fundo branco, como o container da lista de pedidos */
+    /* Fundo branco padrão */
     border-radius: 0.75rem;
     padding: 1.5rem;
     /* Padding interno */
@@ -152,48 +151,40 @@ body {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.card-cliente:hover {
+.card-funcionario:hover {
     transform: translateY(-5px);
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
     /* Sombra um pouco mais forte no hover */
 }
 
-/* Estilos para o conteúdo dentro do card */
-.card-cliente .card-title-id {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    /* Espaço abaixo do título/ID */
-}
-
-.card-cliente .card-title-id h5 {
+/* Estilos para o conteúdo dentro do card (padrão, para o fundo branco) */
+.card-funcionario .card-title-id h5 {
     margin-bottom: 0;
     font-weight: bold;
     color: #343a40;
     /* Cor mais escura para o título */
 }
 
-.card-cliente .card-title-id small {
+.card-funcionario .card-title-id small {
     color: #6c757d;
     /* Cor mais suave para o ID */
 }
 
-.card-cliente .card-text {
+.card-funcionario .card-text {
     margin-bottom: 0.75rem;
     /* Espaço entre os parágrafos de texto */
     color: #495057;
     /* Cor do texto */
 }
 
-.card-cliente .card-text i {
+.card-funcionario .card-text i {
     font-size: 1rem;
     margin-right: 0.5rem;
     color: #0d6efd;
     /* Cor azul primária para os ícones */
 }
 
-.card-cliente .card-footer {
+.card-funcionario .card-footer {
     padding-top: 1rem;
     /* Espaço acima do footer */
     border-top: 1px solid #dee2e6;
@@ -202,7 +193,65 @@ body {
     /* Margem acima da borda */
 }
 
-/* Estilo para a mensagem de nenhum cliente encontrado (reutilizado do pedido) */
+/* NEW: Estilos para o card de funcionário azul marinho */
+.card-funcionario.blue-dark {
+    background-color: #2c3e50;
+    /* Azul marinho */
+    color: #ffffff;
+    /* Texto branco */
+}
+
+.card-funcionario.blue-dark .card-title-id h5 {
+    color: #ffffff;
+    /* Título branco */
+}
+
+.card-funcionario.blue-dark .card-title-id small {
+    color: #adb5bd;
+    /* ID um cinza mais claro para contraste */
+}
+
+.card-funcionario.blue-dark .card-text {
+    color: #e9ecef;
+    /* Texto do corpo mais claro */
+}
+
+.card-funcionario.blue-dark .card-text i {
+    color: #ffffff;
+    /* Ícones brancos */
+}
+
+.card-funcionario.blue-dark .card-footer {
+    border-top-color: #495a6c;
+    /* Borda mais clara para contraste com o fundo */
+}
+
+/* Ajuste para botões de outline no card escuro */
+.card-funcionario.blue-dark .btn-outline-primary {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.card-funcionario.blue-dark .btn-outline-primary:hover {
+    background-color: #0d6efd;
+    /* Azul primário no hover */
+    color: #ffffff;
+    border-color: #0d6efd;
+}
+
+.card-funcionario.blue-dark .btn-outline-danger {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.card-funcionario.blue-dark .btn-outline-danger:hover {
+    background-color: #dc3545;
+    /* Vermelho padrão no hover */
+    color: #ffffff;
+    border-color: #dc3545;
+}
+
+/* Estilo para a mensagem de nenhum funcionário encontrado (reutilizado do pedido/cliente) */
 .empty-state-message {
     background-color: #ffffff;
     /* Fundo branco para a caixa de mensagem */
@@ -262,7 +311,7 @@ body {
     }
 
     /* Em telas menores, o padding do card pode ser menor */
-    .card-cliente {
+    .card-funcionario {
         padding: 1rem;
     }
 

@@ -105,6 +105,14 @@ public class DBHandler {
 		}
 	}
 	
+	public void setTimestamp(int parameterIndex, Timestamp value) throws ModelException {
+        try {
+            preparedStatement.setTimestamp(parameterIndex, value);
+        } catch (SQLException e) {
+            throw new ModelException("Erro ao definir parâmetro TIMESTAMP: " + e.getMessage(), e);
+        }
+    }
+	
 	public int getInt(String column) throws ModelException {
 		try {
 			return resultSet.getInt(column);

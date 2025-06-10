@@ -1,0 +1,125 @@
+/* Estilos globais do Body (copiados das outras páginas) */
+body {
+    background-color: #f0f2f5;
+    /* Fundo cinza claro consistente */
+}
+
+/* Estilos da Navbar do cabeçalho (para o index) */
+.top-navbar {
+    background-color: #ffffff;
+    /* Fundo branco para a navbar */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    /* Sombra sutil */
+    padding: 0.75rem 1.5rem;
+    /* Padding para espaçamento */
+}
+
+.top-navbar .navbar-brand {
+    font-weight: bold;
+    color: #343a40;
+    /* Cor escura para o texto da marca */
+}
+
+.top-navbar .nav-link {
+    color: #495057;
+    /* Cor padrão para links da navbar */
+    padding: 0.5rem 1rem;
+    margin-left: 0.5rem;
+    /* Espaçamento entre os links */
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.top-navbar .nav-link:hover {
+    background-color: #e9ecef;
+    /* Cor de fundo ao passar o mouse */
+    color: #0d6efd;
+    /* Cor do texto ao passar o mouse */
+}
+
+.top-navbar .nav-link.active {
+    font-weight: 600;
+    background-color: #0d6efd !important;
+    /* Cor de fundo mais forte para ativo */
+    color: #ffffff !important;
+    /* Texto branco para ativo */
+}
+
+/* Estilo específico para o botão de Perfil */
+.top-navbar .btn-profile {
+    color: #0d6efd;
+    /* Cor do texto padrão do botão de perfil */
+    background-color: transparent;
+    border-color: #0d6efd;
+    /* Cor da borda */
+}
+
+.top-navbar .btn-profile:hover {
+    color: #ffffff;
+    /* Cor do texto no hover */
+    background-color: #0d6efd;
+    /* Cor de fundo no hover */
+    border-color: #0d6efd;
+}
+
+.top-navbar .btn-profile.active {
+    background-color: #0d6efd;
+    color: #ffffff;
+}
+
+.top-navbar .btn-logout {
+    /* Estilo específico para o botão de Sair/Logout */
+    margin-left: 1rem;
+}
+
+/* Estilos do conteúdo principal */
+.main-content-wrapper {
+    padding: 40px 0;
+    /* Espaçamento interno para o conteúdo principal */
+    flex-grow: 1;
+    /* Faz com que ocupe todo o espaço disponível verticalmente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.card-menu {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, .08);
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-menu:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, .12);
+}
+
+.card-menu .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+}
+
+.card-menu .card-title {
+    font-size: 1.5rem;
+    margin-top: 15px;
+}
+
+/* Estilos do Rodapé */
+.main-footer {
+    /* Renomeado de .footer para .main-footer para evitar conflito */
+    background-color: #343a40;
+    /* Cor escura do Bootstrap */
+    color: #f8f9fa;
+    /* Texto cinza claro */
+    padding: 1.5rem 0;
+    /* Padding vertical */
+    box-shadow: 0 -0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    /* Sombra sutil para cima */
+}

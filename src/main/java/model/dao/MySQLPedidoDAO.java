@@ -10,34 +10,40 @@ import model.Produto;
 
 public class MySQLPedidoDAO implements PedidoDAO {
 
-    @Override
-    public boolean save(Pedido pedido) throws ModelException {
-        DBHandler db = new DBHandler();
+	@Override
+	public boolean save(Pedido pedido) throws ModelException {
+	    DBHandler db = new DBHandler();
 
-        String sql = "INSERT INTO pedido (cliente_id, produto_id, quantidade) VALUES (?, ?, ?)";
+	    // Inclua a coluna data_pedido na sua query de INSERT
+	    String sql = "INSERT INTO pedido (cliente_id, produto_id, quantidade, data_pedido) VALUES (?, ?, ?, ?)";
 
-        db.prepareStatement(sql);
-        db.setInt(1, pedido.getClienteId());
-        db.setInt(2, pedido.getProdutoId());
-        db.setInt(3, pedido.getQuantidade());
+	    db.prepareStatement(sql);
+	    db.setInt(1, pedido.getClienteId());
+	    db.setInt(2, pedido.getProdutoId());
+	    db.setInt(3, pedido.getQuantidade());
+	    // Defina a data do pedido vinda do objeto Pedido
+	    db.setTimestamp(4, pedido.getDataPedido()); 
 
-        return db.executeUpdate() > 0;
-    }
+	    return db.executeUpdate() > 0;
+	}
 
-    @Override
-    public boolean update(Pedido pedido) throws ModelException {
-        DBHandler db = new DBHandler();
+	@Override
+	public boolean update(Pedido pedido) throws ModelException {
+	    DBHandler db = new DBHandler();
 
-        String sql = "UPDATE pedido SET cliente_id = ?, produto_id = ?, quantidade = ? WHERE id = ?";
+	    // Se a data do pedido pode ser atualizada também, inclua-a
+	    String sql = "UPDATE pedido SET cliente_id = ?, produto_id = ?, quantidade = ?, data_pedido = ? WHERE id = ?";
 
-        db.prepareStatement(sql);
-        db.setInt(1, pedido.getClienteId());
-        db.setInt(2, pedido.getProdutoId());
-        db.setInt(3, pedido.getQuantidade());
-        db.setInt(4, pedido.getId());
+	    db.prepareStatement(sql);
+	    db.setInt(1, pedido.getClienteId());
+	    db.setInt(2, pedido.getProdutoId());
+	    db.setInt(3, pedido.getQuantidade());
+	    // Defina a data do pedido vinda do objeto Pedido
+	    db.setTimestamp(4, pedido.getDataPedido()); 
+	    db.setInt(5, pedido.getId());
 
-        return db.executeUpdate() > 0;
-    }
+	    return db.executeUpdate() > 0;
+	}
 
     @Override
     public boolean delete(Pedido pedido) throws ModelException {
@@ -128,6 +134,31 @@ public class MySQLPedidoDAO implements PedidoDAO {
         p.setClienteNome(cliente.getName());
 
         return p;
+    }
+    
+    @Override
+    public List<Pedido> listAllByCliente(int clienteId) throws ModelException {
+        DBHandler db = new DBHandler();
+        List<Pedido> pedidos = new ArrayList<>();
+
+        String sql = "SELECT p.id, p.cliente_id, p.produto_id, p.quantidade, p.data_pedido, " +
+                     "pr.nome AS produto_nome, pr.preco AS produto_preco, " +
+                     "c.nome AS cliente_nome " +
+                     "FROM pedido p " +
+                     "JOIN produto pr ON p.produto_id = pr.id " +
+                     "JOIN cliente c ON p.cliente_id = c.id " +
+                     "WHERE p.cliente_id = ? " + // Adicionado WHERE clause
+                     "ORDER BY p.id";
+
+        db.prepareStatement(sql);
+        db.setInt(1, clienteId); // Define o parâmetro do clienteId
+        db.executeQuery();
+
+        while (db.next()) {
+            Pedido p = createPedido(db);
+            pedidos.add(p);
+        }
+        return pedidos;
     }
 
 }

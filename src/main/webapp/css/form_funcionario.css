@@ -1,0 +1,48 @@
+body {
+    background-color: #f0f2f5;
+    /* Fundo cinza claro para a página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Ocupa a altura total da viewport */
+    padding: 20px;
+    /* Adiciona um padding geral para telas menores */
+}
+
+.form-container-card {
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    /* Sombra mais pronunciada para destaque */
+    padding: 2.5rem;
+    /* Aumenta o padding interno do card */
+    max-width: 600px;
+    /* Largura máxima para o formulário */
+    width: 100%;
+    /* Garante que o formulário ocupe a largura disponível até o max-width */
+}
+
+.form-container-card h1 {
+    color: #343a40;
+    /* Cor do título */
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    /* Deixa o título mais encorpado */
+    text-align: center;
+    /* Centraliza o título */
+}
+
+.form-check-input:checked {
+    background-color: #0d6efd;
+    /* Cor azul do Bootstrap para radio/checkbox marcados */
+    border-color: #0d6efd;
+}
+
+.btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    /* Espaço entre ícone e texto */
+}

@@ -1,6 +1,10 @@
 package controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
@@ -35,6 +39,7 @@ public class PedidosController extends HttpServlet {
         switch (action) {
             case "/CrudTransportadora/pedidos": {
 
+            	loadClientes(req);
                 loadPedidos(req);
 
                 RequestDispatcher rd = req.getRequestDispatcher("/pedidos.jsp");
@@ -119,9 +124,10 @@ public class PedidosController extends HttpServlet {
         String clienteId = req.getParameter("cliente_id");
         String produtoId = req.getParameter("produto_id");
         String quantidade = req.getParameter("quantidade");
+        String dataPedidoStr = req.getParameter("data_pedido"); // <-- Pegue a string da data
 
         Pedido pedido;
-        if (pedidoId.equals(""))
+        if (pedidoId == null || pedidoId.equals("")) // Use null check para maior segurança
             pedido = new Pedido();
         else
             pedido = new Pedido(Integer.parseInt(pedidoId));
@@ -129,6 +135,20 @@ public class PedidosController extends HttpServlet {
         pedido.setClienteId(Integer.parseInt(clienteId));
         pedido.setProdutoId(Integer.parseInt(produtoId));
         pedido.setQuantidade(Integer.parseInt(quantidade));
+
+        // --- Lógica para converter e definir a data ---
+        if (dataPedidoStr != null && !dataPedidoStr.isEmpty()) {
+            try {
+                // Formato da data que vem do input type="date" (yyyy-MM-dd)
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date parsedDate = dateFormat.parse(dataPedidoStr);
+                pedido.setDataPedido(new Timestamp(parsedDate.getTime()));
+            } catch (ParseException e) {          
+                System.err.println("Erro ao converter data do pedido: " + dataPedidoStr + " - " + e.getMessage());
+                req.setAttribute("errorMessage", "Formato de data inválido. Por favor, insira a data no formato YYYY-MM-DD.");
+            }
+        }
+        // --- FIM DA LÓGICA DE DATA ---
 
         return pedido;
     }
@@ -170,17 +190,56 @@ public class PedidosController extends HttpServlet {
     }
 
     private void loadPedidos(HttpServletRequest req) {
-        PedidoDAO dao = DAOFactory.createDAO(PedidoDAO.class);
+        PedidoDAO pedidoDao = DAOFactory.createDAO(PedidoDAO.class);
 
         List<Pedido> pedidos = null;
-        try {
-            pedidos = dao.listAll();
-        } catch (ModelException e) {
-            e.printStackTrace();
+        BigDecimal totalGeralPedidos = BigDecimal.ZERO; // Inicializa a soma
+
+        String clienteIdFilterStr = req.getParameter("clienteFilter"); // Pega o ID do cliente do filtro da requisição
+        int selectedClienteFilter = 0; // Valor padrão para "todos os clientes"
+
+        if (clienteIdFilterStr != null && !clienteIdFilterStr.isEmpty()) {
+            try {
+                selectedClienteFilter = Integer.parseInt(clienteIdFilterStr);
+            } catch (NumberFormatException e) {
+                System.err.println("ID de cliente para filtro inválido: " + clienteIdFilterStr);
+                // Adiciona uma mensagem de erro à requisição caso o ID seja inválido
+                req.setAttribute("errorMessage", "ID de cliente inválido para filtro. O filtro não foi aplicado.");
+            }
         }
 
-        if (pedidos != null)
-            req.setAttribute("pedidos", pedidos);
+        try {
+            if (selectedClienteFilter > 0) {
+                // Se um cliente for selecionado, carrega apenas os pedidos desse cliente
+                pedidos = pedidoDao.listAllByCliente(selectedClienteFilter);
+            } else {
+                // Se nenhum filtro ou filtro "Todos", carrega todos os pedidos
+                pedidos = pedidoDao.listAll();
+            }
+
+            // Calcula a soma total dos pedidos (agora já filtrados)
+            if (pedidos != null) {
+                for (Pedido pedido : pedidos) {
+                    // Garante que o produto e o preço não são nulos antes de somar
+                    if (pedido.getProduto() != null && pedido.getProduto().getPreco() != null) {
+                        totalGeralPedidos = totalGeralPedidos.add(
+                            pedido.getProduto().getPreco().multiply(new BigDecimal(pedido.getQuantidade()))
+                        );
+                    }
+                }
+            }
+
+        } catch (ModelException e) {
+            e.printStackTrace();
+            // Define uma mensagem de erro mais útil para a JSP
+            req.setAttribute("errorMessage", "Erro ao carregar a lista de pedidos: " + e.getMessage());
+        }
+
+        // Define os atributos na requisição, mesmo que a lista de pedidos seja nula (para evitar NullPointer na JSP)
+        req.setAttribute("pedidos", pedidos);
+        req.setAttribute("totalGeralPedidos", totalGeralPedidos);
+        // Adiciona o ID do cliente selecionado de volta para a JSP para manter o dropdown selecionado
+        req.setAttribute("selectedClienteFilter", selectedClienteFilter);
     }
 
     private void loadClientes(HttpServletRequest req) {

@@ -1,1 +1,216 @@
-@charset "UTF-8";
+/* Estilos globais para o layout (copiados da página de pedidos/clientes) */
+        body {
+            background-color: #f0f2f5; /* Light gray background for the page */
+        }
+
+        /* Estilos da Sidebar */
+        .sidebar {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            height: 100vh; /* Pega a altura total da viewport */
+            position: sticky;
+            top: 0;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0.75rem;
+        }
+        .sidebar .nav-link {
+            color: #495057;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .sidebar .nav-link:hover {
+            background-color: #e9ecef;
+            color: #0d6efd;
+        }
+        .sidebar .nav-link.active {
+            font-weight: 600;
+            background-color: #0d6efd !important;
+            color: #ffffff !important;
+            cursor: default; /* Altera o cursor para indicar que não é clicável */
+        }
+        .sidebar .nav-link i {
+            font-size: 1.1rem;
+            margin-right: 0.75rem;
+        }
+        .sidebar-header {
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #343a40;
+            text-align: center;
+        }
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid #dee2e6;
+        }
+        /* Estilo para o botão de Funcionários (com background menor) */
+        .funcionarios-badge-link {
+            display: inline-flex; /* Para que o background se ajuste ao conteúdo */
+            padding: 0.25rem 0.75rem; /* Padding interno menor */
+            border-radius: 50rem; /* Borda bem arredondada para o efeito "pill" */
+            background-color: #0d6efd; /* Cor azul primária */
+            color: #ffffff; /* Texto branco */
+            font-weight: 600; /* Texto em negrito */
+            transition: all 0.2s ease-in-out;
+            align-items: center; /* Centraliza o ícone e texto verticalmente */
+            justify-content: center; /* Centraliza o ícone e texto horizontalmente */
+            text-decoration: none; /* Remove sublinhado */
+            /* margin-left: 0.5rem; Removido para ser controlado pela classe w-100 */
+        }
+        .funcionarios-badge-link:hover {
+            background-color: #0a58ca; /* Tom mais escuro no hover */
+            color: #ffffff;
+            transform: scale(1.02); /* Pequeno zoom no hover */
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* Sombra sutil no hover */
+        }
+        .funcionarios-badge-link.active {
+            background-color: #0a58ca; /* Mantém a cor mais escura quando ativo */
+            color: #ffffff;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+        }
+        .funcionarios-badge-link i {
+            font-size: 1.1rem; /* Tamanho do ícone */
+            margin-right: 0.5rem; /* Espaçamento entre ícone e texto */
+            color: #ffffff; /* Cor do ícone branco */
+        }
+        /* Ajuste para links no sidebar-footer e offcanvas-body para não pegarem estilo de botão */
+        .sidebar-footer .nav-link,
+        .offcanvas-body .nav-link {
+            padding: 0.75rem 1rem; /* Resetar padding do nav-link */
+            margin-bottom: 0.5rem; /* Espaçamento entre eles */
+        }
+        .sidebar-footer .nav-link:hover,
+        .offcanvas-body .nav-link:hover {
+            background-color: #e9ecef;
+            color: #0d6efd;
+        }
+
+        /* Ajuste do container principal para empurrar o conteúdo */
+        #page-content-wrapper {
+            flex-grow: 1;
+        }
+        #page-content-wrapper .container-fluid {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Estilos dos cards de produto (adaptados da página de pedidos) */
+        .card-produto {
+            background-color: #ffffff; /* Fundo branco, como o container da lista de pedidos */
+            border-radius: 0.75rem;
+            padding: 1.5rem; /* Padding interno */
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Sombra sutil */
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .card-produto:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Sombra um pouco mais forte no hover */
+        }
+
+        /* Estilos para o conteúdo dentro do card */
+        .card-produto .card-title-id {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem; /* Espaço abaixo do título/ID */
+        }
+
+        .card-produto .card-title-id h5 {
+            margin-bottom: 0;
+            font-weight: bold;
+            color: #343a40; /* Cor mais escura para o título */
+        }
+
+        .card-produto .card-title-id small {
+            color: #6c757d; /* Cor mais suave para o ID */
+        }
+
+        .card-produto .card-text {
+            margin-bottom: 0.75rem; /* Espaço entre os parágrafos de texto */
+            color: #495057; /* Cor do texto */
+        }
+
+        .card-produto .card-text i {
+            font-size: 1rem;
+            margin-right: 0.5rem;
+            color: #0d6efd; /* Cor azul primária para os ícones */
+        }
+
+        .card-produto .card-footer {
+            padding-top: 1rem; /* Espaço acima do footer */
+            border-top: 1px solid #dee2e6; /* Borda sutil */
+            margin-top: 1rem; /* Margem acima da borda */
+        }
+
+        /* Small adjustments for responsiveness */
+        @media (max-width: 991.98px) { /* Breakpoint para esconder a sidebar em telas menores que lg */
+            .sidebar-toggle {
+                display: block !important;
+                margin-bottom: 1rem;
+            }
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -250px;
+                width: 250px;
+                height: 100vh;
+                z-index: 1050;
+                transition: left 0.3s ease-in-out;
+                padding-top: 5rem;
+                border-radius: 0;
+            }
+            .sidebar.show {
+                left: 0;
+            }
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1040;
+            }
+            .overlay.show {
+                display: block;
+            }
+            #page-content-wrapper {
+                margin-left: 0 !important;
+                padding: 0;
+            }
+            #page-content-wrapper .container-fluid {
+                padding: 1rem;
+                min-height: auto;
+            }
+            /* Em telas menores, o padding do card pode ser menor */
+            .card-produto {
+                padding: 1rem;
+            }
+            /* Estilo para o botão de Funcionários no offcanvas */
+            .offcanvas-body .funcionarios-badge-link {
+                background-color: #0d6efd;
+                color: #ffffff;
+                width: 100%; /* Ocupa a largura total no offcanvas */
+                margin-bottom: 0.5rem; /* Espaçamento abaixo */
+            }
+            .offcanvas-body .funcionarios-badge-link:hover {
+                background-color: #0a58ca;
+            }
+            .offcanvas-body .funcionarios-badge-link.active {
+                background-color: #0a58ca;
+            }
+        }
