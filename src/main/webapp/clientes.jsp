@@ -54,125 +54,38 @@
                             Produtos
                         </a>
                     </li>
-                    <li class="nav-item me-4"> <%-- Adicionado me-4 para espaçamento --%>
-                            <a href="${pageContext.request.contextPath}/pedidos"
-                                class="nav-link ${pageContext.request.servletPath eq '/pedidos' || pageContext.request.servletPath eq '/pedidos/' ? 'active' : ''}">
-                                <i class="bi bi-receipt"></i>
-                                Pedidos
-                            </a>
+                    <li class="nav-item">
+                        <a href="${pageContext.request.contextPath}/pedidos"
+                            class="nav-link ${pageContext.request.servletPath eq '/pedidos' || pageContext.request.servletPath eq '/pedidos/' ? 'active' : ''}">
+                            <i class="bi bi-receipt"></i>
+                            Pedidos
+                        </a>
                     </li>
                 </ul>
                 <div class="mt-auto sidebar-footer">
-                    <%-- Botão Funcionários (personalizado como link de navegação com badge) --%>
-                        <c:set var="isFuncionariosActive"
-                            value="${pageContext.request.servletPath eq '/funcionarios' || pageContext.request.servletPath eq '/funcionarios/'}" />
-                        <c:choose>
-                            <c:when test="${isFuncionariosActive}">
-                                <span class="funcionarios-badge-link active w-100 mb-2">
-                                    <i class="bi bi-person-vcard"></i>Funcionários
-                                </span>
-                            </c:when>
-                            <c:otherwise>
-                                <a href="${pageContext.request.contextPath}/funcionarios"
-                                    class="funcionarios-badge-link w-100 mb-2">
-                                    <i class="bi bi-person-vcard"></i>Funcionários
-                                </a>
-                            </c:otherwise>
-                        </c:choose>
-                        <a href="${pageContext.request.contextPath}/login" class="nav-link text-danger">
-                            <i class="bi bi-box-arrow-right"></i>
-                            Sair
-                        </a>
+                    <c:set var="isFuncionariosActive"
+                        value="${pageContext.request.servletPath eq '/funcionarios' || pageContext.request.servletPath eq '/funcionarios/'}" />
+                    <c:choose>
+                        <c:when test="${isFuncionariosActive}">
+                            <span class="funcionarios-badge-link active w-100 mb-2">
+                                <i class="bi bi-person-vcard"></i>Funcionários
+                            </span>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="${pageContext.request.contextPath}/funcionarios"
+                                class="funcionarios-badge-link w-100 mb-2">
+                                <i class="bi bi-person-vcard"></i>Funcionários
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
+                    <a href="${pageContext.request.contextPath}/login" class="nav-link text-danger">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Sair
+                    </a>
                 </div>
             </nav>
 
             <div id="page-content-wrapper" class="flex-grow-1">
-                <nav class="navbar navbar-light bg-light rounded d-lg-none mb-3 mx-3 mt-3">
-                    <div class="container-fluid">
-                        <button class="btn btn-outline-secondary sidebar-toggle" type="button"
-                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar"
-                            aria-controls="offcanvasSidebar">
-                            <i class="bi bi-list"></i>
-                        </button>
-                        <span class="navbar-brand mb-0 h1 ms-2">Transportadora</span>
-                    </div>
-                </nav>
-
-                <div class="offcanvas offcanvas-start bg-white" tabindex="-1" id="offcanvasSidebar"
-                    aria-labelledby="offcanvasSidebarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="nav nav-pills flex-column mb-auto">
-                            <li class="nav-item">
-                                <a href="${pageContext.request.contextPath}/"
-                                    class="nav-link ${pageContext.request.servletPath eq '/' ? 'active' : ''}"
-                                    aria-current="page">
-                                    <i class="bi bi-house-door"></i>
-                                    Home
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <c:set var="isClientesActiveMobile"
-                                    value="${pageContext.request.servletPath eq '/clientes' || pageContext.request.servletPath eq '/clientes/'}" />
-                                <c:choose>
-                                    <c:when test="${isClientesActiveMobile}">
-                                        <span class="nav-link active">
-                                            <i class="bi bi-person-check"></i>
-                                            Clientes
-                                        </span>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a href="${pageContext.request.contextPath}/clientes" class="nav-link">
-                                            <i class="bi bi-person-check"></i>
-                                            Clientes
-                                        </a>
-                                    </c:otherwise>
-                                </c:choose>
-                            </li>
-                            <li class="nav-item">
-                                <a href="${pageContext.request.contextPath}/produtos"
-                                    class="nav-link ${pageContext.request.servletPath eq '/produtos' ? 'active' : ''}">
-                                    <i class="bi bi-box-seam"></i>
-                                    Produtos
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="${pageContext.request.contextPath}/pedidos"
-                                    class="nav-link ${pageContext.request.servletPath eq '/pedidos' || pageContext.request.servletPath eq '/pedidos/' ? 'active' : ''}">
-                                    <i class="bi bi-receipt"></i>
-                                    Pedidos
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="mt-auto sidebar-footer">
-                            <%-- Botão Funcionários no Mobile --%>
-                                <c:set var="isFuncionariosActiveMobile"
-                                    value="${pageContext.request.servletPath eq '/funcionarios' || pageContext.request.servletPath eq '/funcionarios/'}" />
-                                <c:choose>
-                                    <c:when test="${isFuncionariosActiveMobile}">
-                                        <span class="funcionarios-badge-link active w-100 mb-2">
-                                            <i class="bi bi-person-vcard"></i>Funcionários
-                                        </span>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a href="${pageContext.request.contextPath}/funcionarios"
-                                            class="funcionarios-badge-link w-100 mb-2">
-                                            <i class="bi bi-person-vcard"></i>Funcionários
-                                        </a>
-                                    </c:otherwise>
-                                </c:choose>
-                                <a href="${pageContext.request.contextPath}/login" class="nav-link text-danger">
-                                    <i class="bi bi-box-arrow-right"></i>
-                                    Sair
-                                </a>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="container-fluid">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
@@ -193,40 +106,38 @@
                                         <h5 class="text-truncate">${cliente.name}</h5>
                                         <small>ID: ${cliente.id}</small>
                                     </div>
-                                    <div class="card-body p-0"> <%-- Removido padding do card-body para controlar melhor
-                                            o espaçamento --%>
-                                            <p class="card-text">
-                                                <i class="bi bi-envelope-fill text-primary"></i> ${cliente.email}
-                                            </p>
-                                            <p class="card-text">
-                                                <i class="bi bi-telephone-fill text-primary"></i> ${cliente.telefone}
-                                            </p>
+                                    <div class="card-body p-0">
+                                        <p class="card-text">
+                                            <i class="bi bi-envelope-fill text-primary"></i> ${cliente.email}
+                                        </p>
+                                        <p class="card-text">
+                                            <i class="bi bi-telephone-fill text-primary"></i> ${cliente.telefone}
+                                        </p>
                                     </div>
                                     <div class="card-footer d-flex justify-content-end gap-2 bg-transparent border-0">
-                                        <%-- Ajuste para remover borda e background do footer --%>
-                                            <a class="btn btn-sm btn-outline-primary"
-                                                href="${pageContext.request.contextPath}/cliente/update?clienteId=${cliente.id}"
-                                                title="Editar Cliente">
-                                                <i class="bi bi-pencil-square me-1"></i> Editar
-                                            </a>
-                                            <a class="btn btn-sm btn-outline-danger"
-                                                href="${pageContext.request.contextPath}/cliente/delete?clienteId=${cliente.id}"
-                                                onclick="return confirm('Deseja realmente excluir este cliente?');"
-                                                title="Remover Cliente">
-                                                <i class="bi bi-trash me-1"></i> Remover
-                                            </a>
+                                        <a class="btn btn-sm btn-outline-primary"
+                                            href="${pageContext.request.contextPath}/cliente/update?clienteId=${cliente.id}"
+                                            title="Editar Cliente">
+                                            <i class="bi bi-pencil-square me-1"></i> Editar
+                                        </a>
+                                        <a class="btn btn-sm btn-outline-danger"
+                                            href="${pageContext.request.contextPath}/cliente/delete?clienteId=${cliente.id}"
+                                            onclick="return confirm('Deseja realmente excluir este cliente?');"
+                                            title="Remover Cliente">
+                                            <i class="bi bi-trash me-1"></i> Remover
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </c:forEach>
 
                         <c:if test="${empty clientes}">
-                            <div class="col-12"> <%-- Manter col-12 para ocupar a largura total --%>
-                                    <div class="empty-state-message text-center text-muted py-3 px-3">
-                                        Nenhum cliente cadastrado ainda. <a
-                                            href="${pageContext.request.contextPath}/cliente/update"
-                                            class="alert-link">Cadastre um novo cliente!</a>
-                                    </div>
+                            <div class="col-12">
+                                <div class="empty-state-message text-center text-muted py-3 px-3">
+                                    Nenhum cliente cadastrado ainda. <a
+                                        href="${pageContext.request.contextPath}/cliente/update"
+                                        class="alert-link">Cadastre um novo cliente!</a>
+                                </div>
                             </div>
                         </c:if>
                     </div>
@@ -234,9 +145,9 @@
             </div>
         </div>
 
-
-        <script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
     </body>
 
     </html>

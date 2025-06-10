@@ -42,50 +42,38 @@
                                 Produtos
                             </a>
                         </li>
-                        <li class="nav-item me-4"> <%-- Adicionado me-4 aqui --%>
-                                <a href="${pageContext.request.contextPath}/pedidos"
-                                    class="nav-link ${pageContext.request.servletPath eq '/pedidos' || pageContext.request.servletPath eq '/pedidos/' || pageContext.request.servletPath eq '/pedido/list' || pageContext.request.servletPath eq '/pedido/list/' ? 'active' : ''}">
-                                    <i class="bi bi-receipt"></i>
-                                    Pedidos
-                                </a>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/pedidos"
+                                class="nav-link ${pageContext.request.servletPath eq '/pedidos' || pageContext.request.servletPath eq '/pedidos/' || pageContext.request.servletPath eq '/pedido/list' || pageContext.request.servletPath eq '/pedido/list/' ? 'active' : ''}">
+                                <i class="bi bi-receipt"></i>
+                                Pedidos
+                            </a>
                         </li>
                     </ul>
                     <div class="mt-auto sidebar-footer">
-                        <%-- Botão Funcionários (personalizado como link de navegação com badge) --%>
-                            <c:set var="isFuncionariosActive"
-                                value="${pageContext.request.servletPath eq '/funcionarios' || pageContext.request.servletPath eq '/funcionarios/'}" />
-                            <c:choose>
-                                <c:when test="${isFuncionariosActive}">
-                                    <span class="funcionarios-badge-link active w-100 mb-2">
-                                        <i class="bi bi-person-vcard"></i>Funcionários
-                                    </span>
-                                </c:when>
-                                <c:otherwise>
-                                    <a href="${pageContext.request.contextPath}/funcionarios"
-                                        class="funcionarios-badge-link w-100 mb-2">
-                                        <i class="bi bi-person-vcard"></i>Funcionários
-                                    </a>
-                                </c:otherwise>
-                            </c:choose>
-                            <a href="${pageContext.request.contextPath}/login" class="nav-link text-danger">
-                                <i class="bi bi-box-arrow-right"></i>
-                                Sair
-                            </a>
+                        <c:set var="isFuncionariosActive"
+                            value="${pageContext.request.servletPath eq '/funcionarios' || pageContext.request.servletPath eq '/funcionarios/'}" />
+                        <c:choose>
+                            <c:when test="${isFuncionariosActive}">
+                                <span class="funcionarios-badge-link active w-100 mb-2">
+                                    <i class="bi bi-person-vcard"></i>Funcionários
+                                </span>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${pageContext.request.contextPath}/funcionarios"
+                                    class="funcionarios-badge-link w-100 mb-2">
+                                    <i class="bi bi-person-vcard"></i>Funcionários
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+                        <a href="${pageContext.request.contextPath}/login" class="nav-link text-danger">
+                            <i class="bi bi-box-arrow-right"></i>
+                            Sair
+                        </a>
                     </div>
                 </nav>
 
                 <div id="page-content-wrapper" class="flex-grow-1">
-                    <nav class="navbar navbar-light bg-light rounded d-lg-none mb-3 mx-3 mt-3">
-                        <div class="container-fluid">
-                            <button class="btn btn-outline-secondary sidebar-toggle" type="button"
-                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar"
-                                aria-controls="offcanvasSidebar">
-                                <i class="bi bi-list"></i>
-                            </button>
-                            <span class="navbar-brand mb-0 h1 ms-2">Transportadora</span>
-                        </div>
-                    </nav>
-
                     <div class="container-fluid">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <div>
@@ -109,7 +97,6 @@
                                 </div>
                             </div>
                         </c:if>
-
                         <form action="${pageContext.request.contextPath}/pedidos" method="GET" class="filter-section">
                             <div class="form-group">
                                 <label for="clienteFilter" class="form-label"><i class="bi bi-funnel me-2"></i>Filtrar
@@ -203,7 +190,6 @@
             </div>
 
             <script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script>
-            
         </body>
 
         </html>
