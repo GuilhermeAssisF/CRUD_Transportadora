@@ -63,6 +63,47 @@
             padding-top: 1rem;
             border-top: 1px solid #dee2e6;
         }
+        /* Estilo para o botão de Funcionários (com background menor) */
+        .funcionarios-badge-link {
+            display: inline-flex; /* Para que o background se ajuste ao conteúdo */
+            padding: 0.25rem 0.75rem; /* Padding interno menor */
+            border-radius: 50rem; /* Borda bem arredondada para o efeito "pill" */
+            background-color: #0d6efd; /* Cor azul primária */
+            color: #ffffff; /* Texto branco */
+            font-weight: 600; /* Texto em negrito */
+            transition: all 0.2s ease-in-out;
+            align-items: center; /* Centraliza o ícone e texto verticalmente */
+            justify-content: center; /* Centraliza o ícone e texto horizontalmente */
+            text-decoration: none; /* Remove sublinhado */
+            /* margin-left: 0.5rem; Removido para ser controlado pela classe w-100 */
+        }
+        .funcionarios-badge-link:hover {
+            background-color: #0a58ca; /* Tom mais escuro no hover */
+            color: #ffffff;
+            transform: scale(1.02); /* Pequeno zoom no hover */
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* Sombra sutil no hover */
+        }
+        .funcionarios-badge-link.active {
+            background-color: #0a58ca; /* Mantém a cor mais escura quando ativo */
+            color: #ffffff;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+        }
+        .funcionarios-badge-link i {
+            font-size: 1.1rem; /* Tamanho do ícone */
+            margin-right: 0.5rem; /* Espaçamento entre ícone e texto */
+            color: #ffffff; /* Cor do ícone branco */
+        }
+        /* Ajuste para links no sidebar-footer e offcanvas-body para não pegarem estilo de botão */
+        .sidebar-footer .nav-link,
+        .offcanvas-body .nav-link {
+            padding: 0.75rem 1rem; /* Resetar padding do nav-link */
+            margin-bottom: 0.5rem; /* Espaçamento entre eles */
+        }
+        .sidebar-footer .nav-link:hover,
+        .offcanvas-body .nav-link:hover {
+            background-color: #e9ecef;
+            color: #0d6efd;
+        }
 
         /* Ajuste do container principal para empurrar o conteúdo */
         #page-content-wrapper {
@@ -172,6 +213,19 @@
             .card-produto {
                 padding: 1rem;
             }
+            /* Estilo para o botão de Funcionários no offcanvas */
+            .offcanvas-body .funcionarios-badge-link {
+                background-color: #0d6efd;
+                color: #ffffff;
+                width: 100%; /* Ocupa a largura total no offcanvas */
+                margin-bottom: 0.5rem; /* Espaçamento abaixo */
+            }
+            .offcanvas-body .funcionarios-badge-link:hover {
+                background-color: #0a58ca;
+            }
+            .offcanvas-body .funcionarios-badge-link.active {
+                background-color: #0a58ca;
+            }
         }
     </style>
 </head>
@@ -213,14 +267,7 @@
                         </c:otherwise>
                     </c:choose>
                 </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/funcionarios" class="nav-link ${pageContext.request.servletPath eq '/funcionarios' || pageContext.request.servletPath eq '/funcionarios/' ? 'active' : ''}">
-                        <i class="bi bi-person-vcard"></i>
-                        Funcionários
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <%-- Caminho para Pedidos corrigido para /pedidos --%>
+                <li class="nav-item me-4"> <%-- Adicionado me-4 para espaçamento --%>
                     <a href="${pageContext.request.contextPath}/pedidos" class="nav-link ${pageContext.request.servletPath eq '/pedidos' || pageContext.request.servletPath eq '/pedidos/' ? 'active' : ''}">
                         <i class="bi bi-receipt"></i>
                         Pedidos
@@ -228,6 +275,20 @@
                 </li>
             </ul>
             <div class="mt-auto sidebar-footer">
+                <%-- Botão Funcionários (personalizado como link de navegação com badge) --%>
+                <c:set var="isFuncionariosActive" value="${pageContext.request.servletPath eq '/funcionarios' || pageContext.request.servletPath eq '/funcionarios/'}" />
+                <c:choose>
+                    <c:when test="${isFuncionariosActive}">
+                        <span class="funcionarios-badge-link active w-100 mb-2">
+                            <i class="bi bi-person-vcard"></i>Funcionários
+                        </span>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${pageContext.request.contextPath}/funcionarios" class="funcionarios-badge-link w-100 mb-2">
+                            <i class="bi bi-person-vcard"></i>Funcionários
+                        </a>
+                    </c:otherwise>
+                </c:choose>
                 <a href="${pageContext.request.contextPath}/login" class="nav-link text-danger">
                     <i class="bi bi-box-arrow-right"></i>
                     Sair
@@ -283,13 +344,6 @@
                             </c:choose>
                         </li>
                         <li class="nav-item">
-                            <a href="${pageContext.request.contextPath}/funcionarios" class="nav-link ${pageContext.request.servletPath eq '/funcionarios' || pageContext.request.servletPath eq '/funcionarios/' ? 'active' : ''}">
-                                <i class="bi bi-person-vcard"></i>
-                                Funcionários
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <%-- Caminho para Pedidos corrigido para /pedidos no mobile --%>
                             <a href="${pageContext.request.contextPath}/pedidos" class="nav-link ${pageContext.request.servletPath eq '/pedidos' || pageContext.request.servletPath eq '/pedidos/' ? 'active' : ''}">
                                 <i class="bi bi-receipt"></i>
                                 Pedidos
@@ -297,6 +351,20 @@
                         </li>
                     </ul>
                     <div class="mt-auto sidebar-footer">
+                        <%-- Botão Funcionários no Mobile --%>
+                        <c:set var="isFuncionariosActiveMobile" value="${pageContext.request.servletPath eq '/funcionarios' || pageContext.request.servletPath eq '/funcionarios/'}" />
+                        <c:choose>
+                            <c:when test="${isFuncionariosActiveMobile}">
+                                <span class="funcionarios-badge-link active w-100 mb-2">
+                                    <i class="bi bi-person-vcard"></i>Funcionários
+                                </span>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${pageContext.request.contextPath}/funcionarios" class="funcionarios-badge-link w-100 mb-2">
+                                    <i class="bi bi-person-vcard"></i>Funcionários
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
                         <a href="${pageContext.request.contextPath}/login" class="nav-link text-danger">
                             <i class="bi bi-box-arrow-right"></i>
                             Sair

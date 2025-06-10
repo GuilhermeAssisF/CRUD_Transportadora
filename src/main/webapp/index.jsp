@@ -39,6 +39,21 @@
             background-color: #0d6efd !important; /* Cor de fundo mais forte para ativo */
             color: #ffffff !important; /* Texto branco para ativo */
         }
+        /* Estilo específico para o botão de Perfil */
+        .top-navbar .btn-profile {
+            color: #0d6efd; /* Cor do texto padrão do botão de perfil */
+            background-color: transparent;
+            border-color: #0d6efd; /* Cor da borda */
+        }
+        .top-navbar .btn-profile:hover {
+            color: #ffffff; /* Cor do texto no hover */
+            background-color: #0d6efd; /* Cor de fundo no hover */
+            border-color: #0d6efd;
+        }
+        .top-navbar .btn-profile.active {
+            background-color: #0d6efd;
+            color: #ffffff;
+        }
         .top-navbar .btn-logout { /* Estilo específico para o botão de Sair/Logout */
             margin-left: 1rem;
         }
@@ -122,18 +137,29 @@
                                     <i class="bi bi-box-seam me-2"></i>Produtos
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="${pageContext.request.contextPath}/funcionarios" class="nav-link ${pageContext.request.servletPath eq '/funcionarios' || pageContext.request.servletPath eq '/funcionarios/' ? 'active' : ''}">
-                                    <i class="bi bi-person-vcard me-2"></i>Funcionários
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <li class="nav-item me-4"> <%-- Adicionado me-4 aqui --%>
                                 <a href="${pageContext.request.contextPath}/pedidos" class="nav-link ${pageContext.request.servletPath eq '/pedidos' || pageContext.request.servletPath eq '/pedidos/' ? 'active' : ''}">
                                     <i class="bi bi-receipt me-2"></i>Pedidos
                                 </a>
                             </li>
+                            <%-- Movido para antes do Sair e estilizado como botão de perfil --%>
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath}/login" class="btn btn-outline-danger btn-logout d-flex align-items-center">
+                                <c:set var="isFuncionariosActive" value="${pageContext.request.servletPath eq '/funcionarios' || pageContext.request.servletPath eq '/funcionarios/'}" />
+                                <c:choose>
+                                    <c:when test="${isFuncionariosActive}">
+                                        <span class="btn btn-primary btn-profile d-flex align-items-center active">
+                                            <i class="bi bi-person-vcard me-2"></i>Funcionário
+                                        </span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="${pageContext.request.contextPath}/funcionarios" class="btn btn-outline-primary btn-profile d-flex align-items-center">
+                                            <i class="bi bi-person-vcard me-2"></i>Funcionário
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </li>
+                            <li class="nav-item">
+                                <a href="${pageContext.request.contextPath}/login" class="btn btn-outline-danger btn-logout d-flex align-items-center ms-2"> <%-- Adicionado ms-2 para espaçamento --%>
                                     <i class="bi bi-box-arrow-right me-2"></i>Sair
                                 </a>
                             </li>

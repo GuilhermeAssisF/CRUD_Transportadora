@@ -63,6 +63,47 @@
             padding-top: 1rem;
             border-top: 1px solid #dee2e6;
         }
+        /* Estilo para o botão de Funcionários (com background menor) */
+        .funcionarios-badge-link {
+            display: inline-flex; /* Para que o background se ajuste ao conteúdo */
+            padding: 0.25rem 0.75rem; /* Padding interno menor */
+            border-radius: 50rem; /* Borda bem arredondada para o efeito "pill" */
+            background-color: #0d6efd; /* Cor azul primária */
+            color: #ffffff; /* Texto branco */
+            font-weight: 600; /* Texto em negrito */
+            transition: all 0.2s ease-in-out;
+            align-items: center; /* Centraliza o ícone e texto verticalmente */
+            justify-content: center; /* Centraliza o ícone e texto horizontalmente */
+            text-decoration: none; /* Remove sublinhado */
+            /* margin-left: 0.5rem; Removido para ser controlado pela classe w-100 */
+        }
+        .funcionarios-badge-link:hover {
+            background-color: #0a58ca; /* Tom mais escuro no hover */
+            color: #ffffff;
+            transform: scale(1.02); /* Pequeno zoom no hover */
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* Sombra sutil no hover */
+        }
+        .funcionarios-badge-link.active {
+            background-color: #0a58ca; /* Mantém a cor mais escura quando ativo */
+            color: #ffffff;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+        }
+        .funcionarios-badge-link i {
+            font-size: 1.1rem; /* Tamanho do ícone */
+            margin-right: 0.5rem; /* Espaçamento entre ícone e texto */
+            color: #ffffff; /* Cor do ícone branco */
+        }
+        /* Ajuste para links no sidebar-footer e offcanvas-body para não pegarem estilo de botão */
+        .sidebar-footer .nav-link,
+        .offcanvas-body .nav-link {
+            padding: 0.75rem 1rem; /* Resetar padding do nav-link */
+            margin-bottom: 0.5rem; /* Espaçamento entre eles */
+        }
+        .sidebar-footer .nav-link:hover,
+        .offcanvas-body .nav-link:hover {
+            background-color: #e9ecef;
+            color: #0d6efd;
+        }
 
         /* Ajuste do container principal para empurrar o conteúdo */
         #page-content-wrapper {
@@ -180,6 +221,19 @@
             .card-cliente {
                 padding: 1rem;
             }
+            /* Estilo para o botão de Funcionários no offcanvas */
+            .offcanvas-body .funcionarios-badge-link {
+                background-color: #0d6efd;
+                color: #ffffff;
+                width: 100%; /* Ocupa a largura total no offcanvas */
+                margin-bottom: 0.5rem; /* Espaçamento abaixo */
+            }
+            .offcanvas-body .funcionarios-badge-link:hover {
+                background-color: #0a58ca;
+            }
+            .offcanvas-body .funcionarios-badge-link.active {
+                background-color: #0a58ca;
+            }
         }
     </style>
 </head>
@@ -220,20 +274,28 @@
                         Produtos
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/funcionarios" class="nav-link ${pageContext.request.servletPath eq '/funcionarios' ? 'active' : ''}">
-                        <i class="bi bi-person-vcard"></i>
-                        Funcionários
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/pedidos" class="nav-link ${pageContext.request.servletPath eq '/pedidos' || pageContext.request.servletPath eq '/pedidos' ? 'active' : ''}">
+                <li class="nav-item me-4"> <%-- Adicionado me-4 para espaçamento --%>
+                    <a href="${pageContext.request.contextPath}/pedidos" class="nav-link ${pageContext.request.servletPath eq '/pedidos' || pageContext.request.servletPath eq '/pedidos/' ? 'active' : ''}">
                         <i class="bi bi-receipt"></i>
                         Pedidos
                     </a>
                 </li>
             </ul>
             <div class="mt-auto sidebar-footer">
+                <%-- Botão Funcionários (personalizado como link de navegação com badge) --%>
+                <c:set var="isFuncionariosActive" value="${pageContext.request.servletPath eq '/funcionarios' || pageContext.request.servletPath eq '/funcionarios/'}" />
+                <c:choose>
+                    <c:when test="${isFuncionariosActive}">
+                        <span class="funcionarios-badge-link active w-100 mb-2">
+                            <i class="bi bi-person-vcard"></i>Funcionários
+                        </span>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${pageContext.request.contextPath}/funcionarios" class="funcionarios-badge-link w-100 mb-2">
+                            <i class="bi bi-person-vcard"></i>Funcionários
+                        </a>
+                    </c:otherwise>
+                </c:choose>
                 <a href="${pageContext.request.contextPath}/login" class="nav-link text-danger">
                     <i class="bi bi-box-arrow-right"></i>
                     Sair
@@ -288,12 +350,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="${pageContext.request.contextPath}/funcionarios" class="nav-link ${pageContext.request.servletPath eq '/funcionarios' ? 'active' : ''}">
-                                <i class="bi bi-person-vcard"></i>
-                                Funcionários
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/pedidos" class="nav-link ${pageContext.request.servletPath eq '/pedidos' || pageContext.request.servletPath eq '/pedidos/' ? 'active' : ''}">
                                 <i class="bi bi-receipt"></i>
                                 Pedidos
@@ -301,6 +357,20 @@
                         </li>
                     </ul>
                     <div class="mt-auto sidebar-footer">
+                        <%-- Botão Funcionários no Mobile --%>
+                        <c:set var="isFuncionariosActiveMobile" value="${pageContext.request.servletPath eq '/funcionarios' || pageContext.request.servletPath eq '/funcionarios/'}" />
+                        <c:choose>
+                            <c:when test="${isFuncionariosActiveMobile}">
+                                <span class="funcionarios-badge-link active w-100 mb-2">
+                                    <i class="bi bi-person-vcard"></i>Funcionários
+                                </span>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${pageContext.request.contextPath}/funcionarios" class="funcionarios-badge-link w-100 mb-2">
+                                    <i class="bi bi-person-vcard"></i>Funcionários
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
                         <a href="${pageContext.request.contextPath}/login" class="nav-link text-danger">
                             <i class="bi bi-box-arrow-right"></i>
                             Sair
@@ -365,7 +435,205 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net="text/html; charset=UTF-8" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/pedidos.css">
+    <title>Transportadora - Pedidos</title>
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <nav class="sidebar d-flex flex-column p-3 d-none d-lg-block">
+            <div class="sidebar-header">
+                Transportadora
+            </div>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/" class="nav-link ${pageContext.request.servletPath eq '/' ? 'active' : ''}" aria-current="page">
+                        <i class="bi bi-house-door"></i>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/clientes" class="nav-link ${pageContext.request.servletPath eq '/clientes' ? 'active' : ''}">
+                        <i class="bi bi-person-check"></i>
+                        Clientes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/produtos" class="nav-link ${pageContext.request.servletPath eq '/produtos' ? 'active' : ''}">
+                        <i class="bi bi-box-seam"></i>
+                        Produtos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/funcionarios" class="nav-link ${pageContext.request.servletPath eq '/funcionarios' ? 'active' : ''}">
+                        <i class="bi bi-person-vcard"></i>
+                        Funcionários
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/pedidos" class="nav-link">
+                         <i class="bi bi-receipt"></i>
+                         Pedidos
+                    </a>
+                </li>
+            </ul>
+            <div class="mt-auto sidebar-footer">
+                <a href="${pageContext.request.contextPath}/login" class="nav-link text-danger">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sair
+                </a>
+            </div>
+        </nav>
+
+        <div id="page-content-wrapper" class="flex-grow-1">
+            <nav class="navbar navbar-light bg-light rounded d-lg-none mb-3 mx-3 mt-3">
+                <div class="container-fluid">
+                    <button class="btn btn-outline-secondary sidebar-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <span class="navbar-brand mb-0 h1 ms-2">Transportadora</span>
+                </div>
+            </nav>
+
+            <div class="offcanvas offcanvas-start bg-white" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/" class="nav-link ${pageContext.request.servletPath eq '/' ? 'active' : ''}" aria-current="page">
+                                <i class="bi bi-house-door"></i>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/clientes" class="nav-link ${pageContext.request.servletPath eq '/clientes' ? 'active' : ''}">
+                                <i class="bi bi-person-check"></i>
+                                Clientes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/produtos" class="nav-link ${pageContext.request.servletPath eq '/produtos' ? 'active' : ''}">
+                                <i class="bi bi-box-seam"></i>
+                                Produtos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/funcionarios" class="nav-link ${pageContext.request.servletPath eq '/funcionarios' ? 'active' : ''}">
+                                <i class="bi bi-person-vcard"></i>
+                                Funcionários
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <%-- Verifica se a página atual é /pedido/list ou /pedido/list/ --%>
+                            <c:set var="isPedidosActiveMobile" value="${pageContext.request.servletPath eq '/pedido/list' || pageContext.request.servletPath eq '/pedido/list/'}" />
+                            <c:choose>
+                                <c:when test="${isPedidosActiveMobile}">
+                                    <%-- Se for a página de pedidos, usar um span ou div com a classe active e desabilitar o clique --%>
+                                    <span class="nav-link active">
+                                        <i class="bi bi-receipt"></i>
+                                        Pedidos
+                                    </span>
+                                </c:when>
+                                <c:otherwise>
+                                    <%-- Caso contrário, é um link normal --%>
+                                    <a href="${pageContext.request.contextPath}/pedido/list" class="nav-link">
+                                        <i class="bi bi-receipt"></i>
+                                        Pedidos
+                                    </a>
+                                </c:otherwise>
+                            </c:choose>
+                        </li>
+                    </ul>
+                    <div class="mt-auto sidebar-footer">
+                        <a href="${pageContext.request.contextPath}/login" class="nav-link text-danger">
+                            <i class="bi bi-box-arrow-right"></i>
+                            Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h2 class="fw-bold mb-0">Lista de Pedidos</h2>
+                        <p class="text-muted mb-0">Visualize e gerencie todas as transações com detalhes de pagamento e cliente.</p>
+                    </div>
+                    <a href="${pageContext.request.contextPath}/pedido/update" class="btn btn-primary d-flex align-items-center">
+                        <i class="bi bi-plus-circle me-2"></i>
+                        Novo Pedido
+                    </a>
+                </div>
+
+                <div class="order-list-container">
+                    <div class="row order-header d-none d-md-flex mx-0">
+                        <div class="col col-ped-id text-start">Id</div>
+                        <div class="col col-ped-cliente text-start">Cliente</div>
+                        <div class="col col-ped-produto text-start">Produto</div>
+                        <div class="col col-ped-qty text-start">Qtd</div>
+                        <div class="col col-ped-preco-unit text-start">Preço Unitário</div>
+                        <div class="col col-ped-total text-start">Total Pedido</div>
+                        <div class="col col-ped-data text-start">Data Pedido</div>
+                        <div class="col col-ped-actions text-end">Ações</div>
+                    </div>
+
+                    <ul class="list-unstyled mb-0">
+                        <c:choose>
+                            <c:when test="${not empty pedidos}">
+                                <c:forEach var="pedido" items="${pedidos}" varStatus="loop">
+                                    <li class="order-row">
+                                        <div class="col col-ped-id text-truncate text-start">#${pedido.id}</div>
+                                        <div class="col col-ped-cliente text-truncate text-start">${pedido.clienteNome}</div>
+                                        <div class="col col-ped-produto text-truncate text-start">${pedido.produtoNome}</div>
+                                        <div class="col col-ped-qty text-start">${pedido.quantidade}</div>
+                                        <div class="col col-ped-preco-unit text-start">
+                                            <fmt:formatNumber value="${pedido.produto.preco}" type="currency" currencySymbol="R$ " />
+                                        </div>
+                                        <div class="col col-ped-total fw-bold text-start">
+                                            <fmt:formatNumber value="${pedido.quantidade * pedido.produto.preco}" type="currency" currencySymbol="R$ " />
+                                        </div>
+                                        <div class="col col-ped-data text-start">
+                                            <fmt:formatDate value="${pedido.dataPedido}" pattern="MMM dd,yyyy" />
+                                        </div>
+                                        <div class="col col-ped-actions">
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm p-0 text-muted" type="button" id="dropdownMenuButton${loop.index}" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bi bi-three-dots-vertical"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton${loop.index}">
+                                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/pedido/update?pedidoId=${pedido.id}"><i class="bi bi-pencil me-2"></i>Editar</a></li>
+                                                    <li><a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/pedido/delete?pedidoId=${pedido.id}" onclick="return confirm('Deseja realmente excluir este pedido?');"><i class="bi bi-trash me-2"></i>Remover</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="order-row text-center text-muted py-3 px-3">Nenhum pedido encontrado.</li>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script>
     <script>
         // Script para a sidebar offcanvas em telas menores
         document.addEventListener('DOMContentLoaded', function() {
@@ -381,5 +649,4 @@
         });
     </script>
 </body>
-
 </html>
