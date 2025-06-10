@@ -1,0 +1,190 @@
+body {
+            background-color: #f0f2f5; /* Light gray background for the page */
+        }
+        .order-list-container {
+            background-color: #ffffff; /* White background for the main list area */
+            border-radius: 0.75rem; /* Rounded corners for the entire list block */
+            padding: 1.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Subtle shadow */
+        }
+        .order-row {
+            background-color: #f8f9fa; /* Light gray background for each row */
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem; /* Space between rows */
+            display: flex; /* Mantém flexbox */
+            align-items: center;
+            border: 1px solid #e9ecef; /* Very subtle border for separation */
+        }
+        .order-row:last-child {
+            margin-bottom: 0; /* No margin for the last row */
+        }
+        .order-header {
+            font-weight: 500;
+            color: #6c757d; /* Muted color for headers */
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #dee2e6; /* Separator for headers */
+        }
+        .order-header .col, .order-header .col-auto, .order-header [class*="col-ped-"] {
+            padding-left: 0.75rem; /* px-3 no cabeçalho (0.75rem) */
+            padding-right: 0.75rem; /* px-3 no cabeçalho (0.75rem) */
+            white-space: nowrap; /* Prevent headers from wrapping too early */
+        }
+
+        /* Custom styles for columns to match width distribution */
+        .col-ped-id { flex: 0 0 9%; max-width: 9%; }
+        .col-ped-cliente { flex: 0 0 17%; max-width: 17%; }
+        .col-ped-produto { flex: 0 0 24%; max-width: 24%; }
+        .col-ped-qty { flex: 0 0 8%; max-width: 8%; }
+        .col-ped-preco-unit { flex: 0 0 12%; max-width: 12%; }
+        .col-ped-total { flex: 0 0 12%; max-width: 12%; }
+        .col-ped-data { flex: 0 0 13%; max-width: 13%; }
+        .col-ped-actions { flex: 0 0 50px; max-width: 50px; display: flex; justify-content: flex-end; align-items: center; }
+
+        /* Aplica padding horizontal às colunas dentro das linhas de pedido */
+        .order-row > div {
+            padding-top: 0.75rem; /* py-3 (0.75rem) */
+            padding-bottom: 0.75rem; /* py-3 (0.75rem) */
+            padding-left: 0.75rem; /* px-3 (0.75rem) */
+            padding-right: 0.75rem; /* px-3 (0.75rem) */
+        }
+
+        /* Sidebar Custom Styles */
+        .sidebar {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            height: 100vh; /* Pega a altura total da viewport */
+            position: sticky;
+            top: 0;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0.75rem;
+        }
+        .sidebar .nav-link {
+            color: #495057;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease-in-out;
+            /* Adicionado cursor por padrão, será overridden para "default" no item ativo não clicável */
+            cursor: pointer;
+        }
+        .sidebar .nav-link:hover { /* Hover apenas para itens não ativos */
+            background-color: #e9ecef;
+            color: #0d6efd;
+        }
+        .sidebar .nav-link.active {
+            font-weight: 600;
+            background-color: #0d6efd !important;
+            color: #ffffff !important;
+            /* Estilo para o item ativo que não é clicável */
+            cursor: default; /* Altera o cursor para indicar que não é clicável */
+        }
+        .sidebar .nav-link i {
+            font-size: 1.1rem;
+            margin-right: 0.75rem;
+        }
+        .sidebar-header {
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #343a40;
+            text-align: center;
+        }
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid #dee2e6;
+        }
+
+        /* Ajuste do container principal para empurrar o conteúdo */
+        #page-content-wrapper {
+            flex-grow: 1;
+        }
+        /* Garantir que o container-fluid tenha padding e não grude nas laterais */
+        #page-content-wrapper .container-fluid {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* Small adjustments for responsiveness on smaller screens */
+        @media (max-width: 991.98px) { /* Breakpoint para esconder a sidebar em telas menores que lg */
+            .sidebar-toggle {
+                display: block !important; /* Mostra o botão do menu hamburger */
+                margin-bottom: 1rem;
+            }
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -250px; /* Esconde a sidebar fora da tela */
+                width: 250px;
+                height: 100vh; /* Mantém 100% da altura para mobile também */
+                z-index: 1050;
+                transition: left 0.3s ease-in-out;
+                padding-top: 5rem;
+                border-radius: 0; /* Remove todos os arredondamentos para mobile */
+            }
+            .sidebar.show {
+                left: 0; /* Mostra a sidebar */
+            }
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1040;
+            }
+            .overlay.show {
+                display: block;
+            }
+            #page-content-wrapper {
+                margin-left: 0 !important; /* Remove margem do conteúdo principal em mobile */
+                padding: 0; /* Remover padding geral para mobile */
+            }
+            #page-content-wrapper .container-fluid {
+                padding: 1rem; /* Padding uniforme para o conteúdo principal em mobile */
+                min-height: auto; /* Remover min-height em mobile */
+            }
+            .order-list-container {
+                padding: 1rem;
+            }
+            .order-row {
+                flex-wrap: wrap;
+                padding: 0;
+            }
+            .order-header {
+                display: none;
+            }
+            .order-row > div {
+                flex: 0 0 auto;
+                width: 50%;
+                margin-bottom: 0.25rem;
+                padding: 0.5rem 0.75rem;
+            }
+            .order-row .col-ped-id,
+            .order-row .col-ped-qty {
+                width: 33%;
+            }
+            .order-row .col-ped-actions {
+                width: auto;
+                margin-left: auto;
+                justify-content: flex-end;
+            }
+            .order-row .col-ped-total {
+                width: 100%;
+                text-align: right;
+            }
+        }

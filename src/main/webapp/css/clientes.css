@@ -1,0 +1,137 @@
+/* Estilos globais para o layout */
+        body {
+            background-color: #f0f2f5; /* Light gray background for the page */
+        }
+
+        /* Estilos da Sidebar (copiados da página de pedidos) */
+        .sidebar {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            height: 100vh; /* Pega a altura total da viewport */
+            position: sticky;
+            top: 0;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0.75rem;
+        }
+        .sidebar .nav-link {
+            color: #495057;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .sidebar .nav-link:hover {
+            background-color: #e9ecef;
+            color: #0d6efd;
+        }
+        .sidebar .nav-link.active {
+            font-weight: 600;
+            background-color: #0d6efd !important;
+            color: #ffffff !important;
+            cursor: default; /* Altera o cursor para indicar que não é clicável */
+        }
+        .sidebar .nav-link i {
+            font-size: 1.1rem;
+            margin-right: 0.75rem;
+        }
+        .sidebar-header {
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #343a40;
+            text-align: center;
+        }
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid #dee2e6;
+        }
+
+        /* Ajuste do container principal para empurrar o conteúdo */
+        #page-content-wrapper {
+            flex-grow: 1;
+        }
+        #page-content-wrapper .container-fluid {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Estilos específicos dos cards de cliente */
+        .card-cliente {
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,.08);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .card-cliente:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,.12);
+        }
+
+        .card-header-cliente {
+            background-color: #007bff;
+            color: white;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+            padding: 1rem;
+        }
+
+        .card-body p {
+            margin-bottom: 0.5rem;
+        }
+
+        .card-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Small adjustments for responsiveness */
+        @media (max-width: 991.98px) { /* Breakpoint para esconder a sidebar em telas menores que lg */
+            .sidebar-toggle {
+                display: block !important;
+                margin-bottom: 1rem;
+            }
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -250px;
+                width: 250px;
+                height: 100vh;
+                z-index: 1050;
+                transition: left 0.3s ease-in-out;
+                padding-top: 5rem;
+                border-radius: 0;
+            }
+            .sidebar.show {
+                left: 0;
+            }
+            .overlay { /* Adicionado para escurecer o fundo quando a sidebar mobile está aberta */
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1040;
+            }
+            .overlay.show {
+                display: block;
+            }
+            #page-content-wrapper {
+                margin-left: 0 !important;
+                padding: 0;
+            }
+            #page-content-wrapper .container-fluid {
+                padding: 1rem;
+                min-height: auto;
+            }
+        }
