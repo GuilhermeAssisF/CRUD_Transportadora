@@ -29,6 +29,14 @@ Este repositório contém uma aplicação web para o gerenciamento de dados de u
     * Visualizar uma lista de todos os pedidos.
     * Filtrar pedidos por cliente.
     * Calcular o valor total dos pedidos.
+ 
+## Imagens
+![image](https://github.com/user-attachments/assets/5132dd5e-8586-4942-b71d-a1b66f542a62) ![image](https://github.com/user-attachments/assets/e456ec54-deba-4059-a2a5-833618d75486)
+![image](https://github.com/user-attachments/assets/8562ec51-011e-4e10-ae56-664bc8d67265) ![image](https://github.com/user-attachments/assets/7ef06a29-81e0-4249-bcae-39f9ea9f1ab4)
+
+
+
+
 
 ## Tecnologias Utilizadas
 
