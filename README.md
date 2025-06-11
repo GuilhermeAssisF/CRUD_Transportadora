@@ -137,4 +137,3 @@ Este repositório contém uma aplicação web para o gerenciamento de dados de u
 * **Tratamento de Erros:** Embora `ModelException` seja usada para problemas relacionados ao banco de dados, mensagens de erro mais amigáveis ao usuário e um tratamento de erros mais robusto podem ser necessários para um ambiente de produção.
 * **Validação de Entrada:** Algumas validações de entrada estão presentes (por exemplo, formato de data em `PedidosController`), mas uma validação abrangente tanto no lado do servidor quanto no lado do cliente pode ser benéfica.
 * **Segurança:** A criptografia de senhas é implementada, mas considere medidas de segurança adicionais, como gerenciamento seguro de sessões, proteção contra injeção de SQL (PreparedStatement ajuda, mas a segurança geral da aplicação é importante) e prevenção de cross-site scripting (XSS).
-* **Escalabilidade:** Para aplicações de alto tráfego, considere pooling de conexões e outras otimizações de desempenho.
