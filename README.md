@@ -1,5 +1,3 @@
-Entendido. Irei gerar o README em português e em formato Markdown, com base nos arquivos fornecidos.
-
 # CRUD Transportadora
 
 Este repositório contém uma aplicação web para o gerenciamento de dados de uma empresa de transportes, incluindo clientes, funcionários, produtos e pedidos. A aplicação é desenvolvida em Java (Jakarta EE / Servlet API) para o backend, com JSP para as views, e utiliza um banco de dados MySQL para persistência dos dados. O framework Bootstrap é empregado para o estilo do frontend.
