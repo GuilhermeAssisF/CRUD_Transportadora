@@ -33,7 +33,7 @@ Este repositório contém uma aplicação web para o gerenciamento de dados de u
 ![image](https://github.com/user-attachments/assets/8562ec51-011e-4e10-ae56-664bc8d67265) ![image](https://github.com/user-attachments/assets/7ef06a29-81e0-4249-bcae-39f9ea9f1ab4)
 
 ## Script SQL
-
+https://github.com/GuilhermeAssisF/CRUD_Transportadora/blob/main/scriptsql.txt
 
 ## Tecnologias Utilizadas
 
