@@ -1,4 +1,4 @@
-# CRUD Transportadora
+[scriptsql.txt](https://github.com/user-attachments/files/20699598/scriptsql.txt)# CRUD Transportadora
 
 Este repositório contém uma aplicação web para o gerenciamento de dados de uma empresa de transportes, incluindo clientes, funcionários, produtos e pedidos. A aplicação é desenvolvida em Java (Jakarta EE / Servlet API) para o backend, com JSP para as views, e utiliza um banco de dados MySQL para persistência dos dados. O framework Bootstrap é empregado para o estilo do frontend.
 
@@ -33,6 +33,7 @@ Este repositório contém uma aplicação web para o gerenciamento de dados de u
 ![image](https://github.com/user-attachments/assets/8562ec51-011e-4e10-ae56-664bc8d67265) ![image](https://github.com/user-attachments/assets/7ef06a29-81e0-4249-bcae-39f9ea9f1ab4)
 
 ## Script SQL
+[Uploadi
 CREATE DATABASE IF NOT EXISTS transportadora;
 
 USE transportadora;
@@ -73,7 +74,8 @@ CREATE TABLE pedido (
     CONSTRAINT fk_pedido_produto FOREIGN KEY (produto_id) REFERENCES produto(id)
 );
 
-alter table funcionario add column sexo ENUM('M', 'F')
+alter table funcionario add column sexo ENUM('M', 'F')ng scriptsql.txt…]()
+
 
 
 ## Tecnologias Utilizadas
