@@ -11,11 +11,11 @@ public class Pedido {
     private int quantidade;
     private Timestamp dataPedido;
 
-    // Campos para exibir nome de cliente e nome do produto
+    // exibir nome de cliente e nome do produto
     private String clienteNome;
     private String produtoNome;
 
-    // Referências para objetos completos (opcional, mas útil)
+    // Referências para objeto
     private Cliente cliente;
     private Produto produto;
 
@@ -26,8 +26,6 @@ public class Pedido {
     public Pedido(int id) {
         this.id = id;
     }
-
-    // Getters e Setters padrão
 
     public int getId() {
         return id;
@@ -101,7 +99,7 @@ public class Pedido {
         this.produto = produto;
     }
 
-    // Opcional: método que calcula o valor total do pedido
+    // método que calcula o valor total do pedido
     public BigDecimal getValorTotal() {
         if (produto != null && produto.getPreco() != null) {
             return produto.getPreco().multiply(new BigDecimal(quantidade));

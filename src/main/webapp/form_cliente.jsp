@@ -32,16 +32,15 @@
                         value="${cliente != null ? cliente.email : ''}" placeholder="Digite o email do cliente">
                 </div>
 
-                <div class="mb-4"> <%-- Aumentado o mb para o último campo antes dos botões --%>
+                <div class="mb-4">
                         <label for="cliente_telefone_id" class="form-label"><i
                                 class="bi bi-telephone me-2"></i>Telefone</label>
-                        <input type="text" id="cliente_telefone_id" name="cliente_telefone" class="form-control"
+                        <input type="tel" id="cliente_telefone_id" name="cliente_telefone" class="form-control"
                             value="${cliente != null ? cliente.telefone : ''}"
-                            placeholder="Digite o telefone do cliente">
+                            placeholder="Digite o telefone do cliente (11 dígitos)" **pattern="[0-9]{11}" title="Por favor, insira exatamente 11 dígitos numéricos."**>
                 </div>
 
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end"> <%-- Botões alinhados à direita e empilhados
-                        em mobile --%>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button type="submit" class="btn btn-primary btn-lg">
                             <i class="bi bi-save me-2"></i>Salvar
                         </button>

@@ -33,15 +33,14 @@
                         placeholder="Descreva o produto (opcional)" maxlength="500">${produto.descricao}</textarea>
                 </div>
 
-                <div class="mb-4"> <%-- Aumentado o mb para o último campo antes dos botões --%>
+                <div class="mb-4"> 
                         <label for="produto_preco" class="form-label"><i class="bi bi-cash-coin me-2"></i>Preço
                             (R$)</label>
                         <input type="number" step="0.01" min="0" class="form-control" id="produto_preco"
                             name="produto_preco" value="${produto.preco}" placeholder="Ex: 99.99" required />
                 </div>
 
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end"> <%-- Botões alinhados à direita e empilhados
-                        em mobile --%>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button type="submit" class="btn btn-primary btn-lg">
                             <i class="bi bi-save me-2"></i>Salvar
                         </button>

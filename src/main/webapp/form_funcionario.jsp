@@ -30,7 +30,7 @@
 
                 <div class="mb-3">
                     <label class="form-label"><i class="bi bi-gender-ambiguous me-2"></i>Gênero</label>
-                    <div class="d-flex gap-4"> <%-- Usando d-flex e gap para espaçar os radios --%>
+                    <div class="d-flex gap-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="funcionario_gender" value="M"
                                     id="funcionario_gender_m" ${funcionario !=null && funcionario.gender=='M'
@@ -53,7 +53,7 @@
                         value="${funcionario != null ? funcionario.email : ''}" placeholder="Digite o email" required>
                 </div>
 
-                <div class="mb-4"> <%-- Aumentado o mb para o último campo antes dos botões --%>
+                <div class="mb-4">
                         <label for="funcionario_pw_id" class="form-label"><i class="bi bi-key me-2"></i>Senha</label>
                         <input type="password" id="funcionario_pw_id" name="funcionario_pw" class="form-control"
                             placeholder="${funcionario == null ? 'Crie uma senha' : 'Deixe em branco para manter a atual'}"
@@ -63,8 +63,7 @@
                         </small>
                 </div>
 
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end"> <%-- Botões alinhados à direita e empilhados
-                        em mobile --%>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button type="submit" class="btn btn-primary btn-lg">
                             <i class="bi bi-save me-2"></i>Salvar
                         </button>

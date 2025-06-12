@@ -38,7 +38,6 @@ public class MySQLFuncionarioDAO implements FuncionarioDAO {
 
         db.prepareStatement(sqlUpdate);
         
-        // Se a senha veio nula ou vazia, busca a senha atual
         String senha = funcionario.getSenha();
         if (senha == null || senha.equals("")) {
             senha = this.findById(funcionario.getId()).getSenha();

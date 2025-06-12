@@ -195,8 +195,8 @@ public class PedidosController extends HttpServlet {
         List<Pedido> pedidos = null;
         BigDecimal totalGeralPedidos = BigDecimal.ZERO; // Inicializa a soma
 
-        String clienteIdFilterStr = req.getParameter("clienteFilter"); // Pega o ID do cliente do filtro da requisição
-        int selectedClienteFilter = 0; // Valor padrão para "todos os clientes"
+        String clienteIdFilterStr = req.getParameter("clienteFilter"); 
+        int selectedClienteFilter = 0; 
 
         if (clienteIdFilterStr != null && !clienteIdFilterStr.isEmpty()) {
             try {
@@ -217,7 +217,7 @@ public class PedidosController extends HttpServlet {
                 pedidos = pedidoDao.listAll();
             }
 
-            // Calcula a soma total dos pedidos (agora já filtrados)
+            // Calcula a soma total dos pedidos filtrados
             if (pedidos != null) {
                 for (Pedido pedido : pedidos) {
                     // Garante que o produto e o preço não são nulos antes de somar
@@ -231,14 +231,11 @@ public class PedidosController extends HttpServlet {
 
         } catch (ModelException e) {
             e.printStackTrace();
-            // Define uma mensagem de erro mais útil para a JSP
             req.setAttribute("errorMessage", "Erro ao carregar a lista de pedidos: " + e.getMessage());
         }
 
-        // Define os atributos na requisição, mesmo que a lista de pedidos seja nula (para evitar NullPointer na JSP)
         req.setAttribute("pedidos", pedidos);
         req.setAttribute("totalGeralPedidos", totalGeralPedidos);
-        // Adiciona o ID do cliente selecionado de volta para a JSP para manter o dropdown selecionado
         req.setAttribute("selectedClienteFilter", selectedClienteFilter);
     }
 

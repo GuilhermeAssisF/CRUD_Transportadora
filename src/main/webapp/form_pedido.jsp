@@ -37,8 +37,7 @@
                         <label for="produto_id" class="form-label"><i class="bi bi-box-seam me-2"></i>Produto</label>
                         <select id="produto_id" name="produto_id" class="form-select" required>
                             <option value="">Selecione um Produto</option>
-                            <c:forEach var="produtoItem" items="${produtos}"> <%-- Renomeado para produtoItem para
-                                    evitar conflito de var 'produto' no select --%>
+                            <c:forEach var="produtoItem" items="${produtos}">
                                     <option value="${produtoItem.id}" ${pedido !=null &&
                                         produtoItem.id==pedido.produtoId ? 'selected' : '' }>
                                         ${produtoItem.nome}
@@ -53,11 +52,9 @@
                             value="${pedido != null ? pedido.quantidade : ''}" min="1" placeholder="Ex: 1" required>
                     </div>
 
-                    <div class="mb-4"> <%-- Aumentado o mb para o último campo antes dos botões --%>
+                    <div class="mb-4">
                             <label for="data_pedido" class="form-label"><i class="bi bi-calendar-date me-2"></i>Data do
                                 Pedido</label>
-                            <%-- Assumindo que seu objeto 'pedido' tem uma propriedade 'dataPedido' do tipo
-                                Date/LocalDate/LocalDateTime --%>
                                 <input type="date" class="form-control" id="data_pedido" name="data_pedido"
                                     value="<fmt:formatDate value='${pedido.dataPedido}' pattern='yyyy-MM-dd' />"
                                     required />

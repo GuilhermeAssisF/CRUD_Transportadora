@@ -27,7 +27,6 @@
                         <div class="collapse navbar-collapse" id="mainNavbarCollapse">
                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <%-- Lógica para o item "Home" (ativo e não clicável nesta página) --%>
                                         <c:set var="isHomeActive"
                                             value="${pageContext.request.servletPath eq '/' || pageContext.request.servletPath eq '/index.jsp'}" />
                                         <c:choose>
@@ -55,13 +54,12 @@
                                         <i class="bi bi-box-seam me-2"></i>Produtos
                                     </a>
                                 </li>
-                                <li class="nav-item me-4"> <%-- Adicionado me-4 aqui --%>
+                                <li class="nav-item me-4">
                                         <a href="${pageContext.request.contextPath}/pedidos"
                                             class="nav-link ${pageContext.request.servletPath eq '/pedidos' || pageContext.request.servletPath eq '/pedidos/' ? 'active' : ''}">
                                             <i class="bi bi-receipt me-2"></i>Pedidos
                                         </a>
                                 </li>
-                                <%-- Movido para antes do Sair e estilizado como botão de perfil --%>
                                     <li class="nav-item">
                                         <c:set var="isFuncionariosActive"
                                             value="${pageContext.request.servletPath eq '/funcionarios' || pageContext.request.servletPath eq '/funcionarios/'}" />
@@ -83,7 +81,6 @@
                                     <li class="nav-item">
                                         <a href="${pageContext.request.contextPath}/login"
                                             class="btn btn-outline-danger btn-logout d-flex align-items-center ms-2">
-                                            <%-- Adicionado ms-2 para espaçamento --%>
                                                 <i class="bi bi-box-arrow-right me-2"></i>Sair
                                         </a>
                                     </li>

@@ -133,7 +133,7 @@ public class ProdutosController extends HttpServlet {
                 produto.setPreco(preco);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
-                produto.setPreco(BigDecimal.ZERO); // fallback para evitar NullPointer
+                produto.setPreco(BigDecimal.ZERO);
             }
         } else {
             produto.setPreco(BigDecimal.ZERO);
